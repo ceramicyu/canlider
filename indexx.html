@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>日历</title>		
+	</head>
+	<body>
+		<table id="tab" width="400" border="1" cellspacing="1" cellpadding="1"
+			style="margin: 50px auto; text-align: center;">
+			<tr><th colspan="7"> <span id="yy"></span> </th></tr>
+			<tr><th>星期日</th><th>星期一</th><th>星期二</th><th>星期三</th><th>星期四</th><th>星期五</th><th>星期三六</th></tr>
+			
+		</table>
+	</body>
+</html>
+<script>
+	(function(){
+		var date=new Date();
+		var year=date.getFullYear();//年份
+		var month=date.getMonth()+1;//月份
+		var dd=date.getDate();//天
+		var day=date.getDay();//星期
+		
+		yy.innerHTML=year+'年'+month+'月';
+		
+		//判断一个月多少天？
+		date.setMonth(month);
+		date.setDate(0);
+	    var hm=date.getDate();//当前月份的天数
+		
+		//判断当前月的1号星期几？
+		var fir=1+(day+7-dd%7)%7;
+		var num=1;
+		var t=false,t1=false;
+		for(var i=2,hang=10;i<=hang;i++){
+			 tab.insertRow(i);
+			 for(var j=0;j<7;j++){
+			 	
+			 	tab.rows[i].insertCell(j);
+			 	
+			 	if(t){
+			 		if(t1){
+			 			
+			 		}else{
+			 			tab.rows[i].cells[j].innerHTML=num;
+				 		if(num==dd){tab.rows[i].cells[j].style.background='cyan';}//标记当天
+				 		num++; 
+				 		if(num>hm){//判断最后一天
+				 			num=1;
+				 			hang=i;
+				 			t1=true}
+			 		}
+			 		
+			 	}else{
+			 		if(i==2&&j==fir){
+				 		tab.rows[i].cells[j].innerHTML=num;
+				 		t=true;
+				 		num++;
+			 	    }
+			 	}
+			 	
+			 }
+			
+		}
+		
+	
+	})();
+	
+	
+</script>
